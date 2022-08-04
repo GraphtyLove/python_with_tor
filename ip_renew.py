@@ -1,6 +1,10 @@
 import requests
+import os
 from stem import Signal
 from stem.control import Controller
+import socket
+import socks
+
 
 # Connect to TOR controller
 controller = Controller.from_port(port=9051)
@@ -19,7 +23,7 @@ proxies = {
 def renew_tor():
     """Function that renew your TOR ip."""
     # Set your password with the password you defined during installation (See README.md)
-    controller.authenticate("YOUR_PASSWORD_HERE:q")
+    controller.authenticate(os.environ.get("TOR_PASSWORD", "YOUR_PASSWORD_HERE"))
     controller.signal(Signal.NEWNYM)
 
 

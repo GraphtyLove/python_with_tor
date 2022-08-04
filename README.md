@@ -3,7 +3,12 @@ The goal if this repo is to document how to use [TOR](https://www.torproject.org
 
 
 ## Installation
-You need to isntall and enable TOR server.
+You need `Python 3`.
+Install python3 dependencies:
+```bash
+pip install -r requirements.txt
+```
+You need to install and enable TOR server.
 ```bash
 sudo apt install tor
 sudo service tor start
@@ -37,10 +42,26 @@ sudo service tor restart
 ```
 
 ## Usage
+### Without Docker
 You can see a documented simple python usage of it in [simple.py](./simple.py).
 In this version, your IP won't change once fixed.
 
 You can see a documented example with ip renew each request in [ip_renew.py](./ip_renew.py).
+
+### With Docker
+You can also use docker to do that.
+
+First change the TOR password in the Docker file.
+
+```Dockerfile
+RUN export TOR_PASSWORD=$(tor --hash-password "CHANGE_ME") 
+```
+
+Then build the image and run the container.
+```bash
+docker build -t python_tor .;
+docker run -t python_tor;
+```
 
 
 ## Resources
