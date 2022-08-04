@@ -51,10 +51,9 @@ You can see a documented example with ip renew each request in [ip_renew.py](./i
 ### With Docker
 You can also use docker to do that.
 
-First change the TOR password in the Docker file.
-
+First change the TOR password in the Docker file. Use the output of: `tor --hash-password "your password here"`
 ```Dockerfile
-RUN export TOR_PASSWORD=$(tor --hash-password "CHANGE_ME") 
+ENV TOR_PASSWORD="16:6710B9B3468CA479608B0F46A6AF973EF7009ECD1698BD79F39283E2C4"
 ```
 
 Then build the image and run the container.
