@@ -63,6 +63,28 @@ docker run -t python_tor;
 ```
 
 
+## Tor python module
+If you would like to use this module in your own project, you can use the `Tor` class from the [tor_module.py](./tor_module.py) file.
+
+```python
+from tor_module import Tor
+
+tor = Tor()
+
+# Do your request like this
+response = tor.get_request("https://api.ipify.org?format=json").text
+print(response)
+
+# Renew your ip like this
+tor.renew_tor_ip()
+response = tor.get_request("https://api.ipify.org?format=json").text
+print(response)
+
+# Check your ip like this
+ip = tor.get_ip()
+print(ip)
+```
+
 ## Resources
 - [StackOverflow demo](https://stackoverflow.com/questions/28035413/general-socks-server-failure-when-switching-identity-using-stem)
 - [Step-by-step Blog post](https://sylvaindurand.org/use-tor-with-python/)
