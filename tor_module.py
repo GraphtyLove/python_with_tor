@@ -10,19 +10,20 @@ from stem.control import Controller
 class Tor:
 	"""Class that handle TOR connection."""
 
-	# Set proxies to send the request to TOR
-	_proxies = {
-		'http': 'socks5h://127.0.0.1:9050',
-		'https': 'socks5h://127.0.0.1:9050'
-	}
 	# API that return your IP
 	_get_ip_url = "https://nordvpn.com/wp-admin/admin-ajax.php?action=get_user_info_data"
 
 	def __init__(
 			self,
 			tor_password: str = os.environ.get("TOR_PASSWORD", "YOUR_PASSWORD_HERE"),
+            tor_port: int = 9050
 			headers: Dict[str, str] | None = None
 	):
+    	# Set proxies to send the request to TOR
+        self._proxies = {
+            'http': 'socks5h://127.0.0.1:{tor_port}',
+            'https': 'socks5h://127.0.0.1:{tor_port}'
+        }
 		self._tor_password = tor_password
 		self.headers = headers
 		# Connect to TOR controller
